@@ -17,8 +17,8 @@ const Navbar = () => {
 
         {/* Left — Logo */}
         <Link href="/" className="text-xl font-bold tracking-tight shrink-0">
-          <span className="text-white">Aura</span>
-          <span className="text-[#D4AF37]">Tiles</span>
+          <span className="text-white">AH </span>
+          <span className="text-[#D4AF37]">TileCraft</span>
         </Link>
 
         {/* Center — Desktop Links */}

@@ -11,6 +11,15 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Define Keyframes */
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Define the Animation utility */
+  --animate-ticker: ticker 20s linear infinite;
 }
 
 @media (prefers-color-scheme: dark) {

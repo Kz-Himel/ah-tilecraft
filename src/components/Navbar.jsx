@@ -8,7 +8,7 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Home", href: "/" },
-    { label: "All Tiles", href: "/all-tiles" },
+    { label: "All Tiles", href: "/alltiles" },
   ];
 
   return (

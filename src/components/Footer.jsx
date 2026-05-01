@@ -36,7 +36,7 @@ const Footer = () => {
             <div className="text-white/40 text-sm leading-relaxed">
               <p>Artisan Co.</p>
               <p>123 Tile Street, Design District</p>
-              <p>contact@auratiles.com</p>
+              <p>contact@ahtilecraft.com</p>
             </div>
           </div>
 

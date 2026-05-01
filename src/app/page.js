@@ -1,10 +1,12 @@
 import Banner from "@/components/Banner";
-import Image from "next/image";
+import Footer from "@/components/Footer";
 
 const Home = () => {
   return (
     <div className="flex flex-col">
       <Banner />
+      {/*  */}
+      <Footer />
     </div>
   );
 }

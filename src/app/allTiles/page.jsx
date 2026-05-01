@@ -2,8 +2,10 @@ import TileCard from "@/components/TileCard";
 
 const AllTiles = async () => {
 
-    const res = await fetch("./data/tilesData.json");
+    const res = await fetch("http://localhost:5000/tiles");
     const tiles = await res.json();
+
+    console.log(tiles);
 
     return (
         <div>
@@ -11,7 +13,7 @@ const AllTiles = async () => {
             <div>
                 {
                     tiles.map((tile) => (
-                        <TileCard key={tiles.id} tile={tile}/>
+                        <TileCard key={tile.id} tile={tile}/>
                     ))
                 }
             </div>

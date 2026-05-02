@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const NotFound = () => {
   return (
-    <div className={`${playfair.variable} ${inter.variable} min-h-screen bg-[#F8F9FA] flex flex-col`}>
+    <div className="min-h-screen bg-[#F8F9FA] flex flex-col">
  
       {/* Navbar */}
       <nav className="h-16 border-b border-[#e2e2e2] bg-white flex items-center justify-between px-10">
@@ -10,7 +10,7 @@ const NotFound = () => {
           href="/"
           className="font-[family-name:var(--font-playfair)] text-xl font-bold text-[#1A1A1A]"
         >
-          AuraTiles
+          AH TileCraft
         </Link>
         <div className="hidden md:flex items-center gap-8 font-[family-name:var(--font-inter)] text-[12px] font-medium tracking-widest uppercase">
           <Link href="/" className="text-[#1A1A1A] hover:text-[#D4AF37] transition-colors">Home</Link>

@@ -1,5 +1,9 @@
-import { Card, CardFooter, Image, Button, Chip } from "@heroui/react";
+"use client";
+
+import { Card, Chip } from "@heroui/react";
 import { FaArrowRight } from "react-icons/fa6";
+import Image from "next/image";
+import Link from "next/link";
 
 const TileCard = ({ tile }) => {
   const {
@@ -12,76 +16,79 @@ const TileCard = ({ tile }) => {
     currency,
     dimensions,
     material,
-    inStock
+    inStock,
   } = tile;
 
   return (
     <Card
-      isFooterBlurred
-      className="group w-full h-[480px] border-none bg-[#1A1A1A] overflow-hidden"
       radius="lg"
+      className="group w-full h-[420px] bg-[#1A1A1A] overflow-hidden relative flex flex-col"
     >
-      {/* Category & Price Overlay */}
-      <div className="absolute top-4 left-4 right-4 z-20 flex justify-between items-center">
-        {/* Category Badge */}
-        <Chip 
-          variant="flat" 
-          className="bg-[#D4AF37] text-black text-[10px] font-bold uppercase tracking-widest px-2 py-0 h-7"
-        >
-          {category}
-        </Chip>
-
-        {/* Stock Status / Price */}
-        <div className="flex flex-col items-end gap-2">
-          {!inStock && (
-            <span className="bg-red-500/80 backdrop-blur-md text-white text-[9px] px-2 py-1 rounded-sm uppercase tracking-tighter">
+      {/* Image */}
+      <div className="relative w-full h-[60%] overflow-hidden">
+        <Image
+          src={image}
+          alt={title}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="object-cover group-hover:scale-110 transition duration-700"
+        />
+        {/* Out of Stock Overlay */}
+        {!inStock && (
+          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+            <span className="text-red-400 text-xs font-bold uppercase tracking-widest border border-red-400 px-2 py-1 rounded">
               Out of Stock
             </span>
-          )}
-          <span className="bg-black/50 backdrop-blur-md border border-white/10 text-white px-3 py-1 rounded-md text-sm font-bold">
-            {currency} {price}
-          </span>
-        </div>
+          </div>
+        )}
       </div>
 
-      {/* Image with Professional Zoom */}
-      {/* <Image
-        alt={title}
-        removeWrapper
-        className="z-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-        src={image}
-      /> */}
+      {/* Content */}
+      <div className="flex flex-col justify-between flex-1 p-4">
+        {/* Top */}
+        <div>
+          <div className="flex justify-between items-center mb-2">
+            <Chip className="bg-[#D4AF37] text-black text-[10px] font-bold uppercase px-2 py-0 h-6">
+              {category}
+            </Chip>
+          </div>
 
-      {/* Footer Details */}
-      <CardFooter className="absolute bottom-0 z-10 border-t border-white/10 bg-black/70 flex-col items-start p-6 backdrop-blur-lg transition-all duration-500 group-hover:bg-black/90">
-        <div className="w-full mb-3">
-          <h4 className="text-white font-serif text-2xl font-semibold tracking-wide mb-1 transition-colors group-hover:text-[#D4AF37]">
+          <h4 className="text-white text-sm font-semibold mb-1 line-clamp-1">
             {title}
           </h4>
-          <div className="flex items-center gap-3">
-            <p className="text-[#D4AF37]/80 text-[11px] font-mono uppercase tracking-widest">
-              {dimensions}
-            </p>
-            <span className="w-1 h-1 rounded-full bg-white/20"></span>
-            <p className="text-white/40 text-[11px] font-mono uppercase tracking-widest">
-              {material}
-            </p>
+
+          <p className="text-white/60 text-xs line-clamp-2 mb-2">
+            {description}
+          </p>
+
+          <div className="text-[10px] text-white/40 flex gap-2">
+            <span>{dimensions}</span>
+            <span>•</span>
+            <span>{material}</span>
           </div>
         </div>
 
-        <p className="text-white/60 text-xs line-clamp-2 mb-6 leading-relaxed font-light italic">
-          {description}
-        </p>
+        {/* Bottom */}
+        <div className="mt-3">
+          <div className="text-white font-bold mb-2 text-sm">
+            {currency} {price}
+          </div>
 
-        <Button
-          fullWidth
-          className="bg-[#D4AF37] text-black font-bold text-xs tracking-[0.2em] uppercase transition-all duration-400 py-6 hover:bg-white hover:scale-[1.02]"
-          radius="none"
-          endContent={<FaArrowRight className="text-[12px] group-hover:translate-x-1 transition-transform" />}
-        >
-          View Details
-        </Button>
-      </CardFooter>
+          <Link href={`/tiles/${id}`} className="block">
+            <button
+              disabled={!inStock}
+              className={`w-full flex items-center justify-center gap-2 text-xs font-bold uppercase py-2 px-4 rounded-lg transition
+                ${
+                  inStock
+                    ? "bg-[#D4AF37] text-black hover:bg-[#b8962e]"
+                    : "bg-white/10 text-white/30 cursor-not-allowed"
+                }`}
+            >
+              View <FaArrowRight />
+            </button>
+          </Link>
+        </div>
+      </div>
     </Card>
   );
 };

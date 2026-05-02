@@ -1,39 +1,33 @@
 import TileCard from "@/components/TileCard";
 
 const AllTiles = async () => {
-  let tiles = [];
+  
+  const res = await fetch("http://localhost:5000/tiles");
+  const tiles = await res.json();
 
-  try {
-    const res = await fetch("http://localhost:5000/tiles", {
-      cache: "no-store",
-    });
+  // try {
+  //   const res = await fetch("http://localhost:5000/tiles", {
+  //     cache: "no-store",
+  //   });
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch tiles");
-    }
+  //   if (!res.ok) {
+  //     throw new Error("Failed to fetch tiles");
+  //   }
 
-    tiles = await res.json();
-  } catch (error) {
-    return (
-      <section className="bg-[#0a0a0a] py-20 px-4">
-        <div className="max-w-7xl mx-auto w-full text-center">
-          <p className="text-red-400 text-sm">
-            Failed to load tiles. Please try again later.
-          </p>
-        </div>
-      </section>
-    );
-  }
+  //   const tiles = await res.json();
 
-  if (tiles.length === 0) {
-    return (
-      <section className="bg-[#0a0a0a] py-20 px-4">
-        <div className="max-w-7xl mx-auto w-full text-center">
-          <p className="text-white/50 text-sm">No tiles found.</p>
-        </div>
-      </section>
-    );
-  }
+  //   console.log(tiles);
+  // } catch (error) {
+  //   return (
+  //     <section className="bg-[#0a0a0a] py-20 px-4">
+  //       <div className="max-w-7xl mx-auto w-full text-center">
+  //         <p className="text-red-400 text-sm">
+  //           Failed to load tiles. Please try again later.
+  //         </p>
+  //       </div>
+  //     </section>
+  //   );
+  // }
 
   return (
     <section className="bg-[#0a0a0a] py-20 px-4">

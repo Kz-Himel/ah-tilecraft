@@ -4,21 +4,6 @@ const NotFound = () => {
   return (
     <div className="min-h-screen bg-[#F8F9FA] flex flex-col">
  
-      {/* Navbar */}
-      <nav className="h-16 border-b border-[#e2e2e2] bg-white flex items-center justify-between px-10">
-        <Link
-          href="/"
-          className="font-[family-name:var(--font-playfair)] text-xl font-bold text-[#1A1A1A]"
-        >
-          AH TileCraft
-        </Link>
-        <div className="hidden md:flex items-center gap-8 font-[family-name:var(--font-inter)] text-[12px] font-medium tracking-widest uppercase">
-          <Link href="/" className="text-[#1A1A1A] hover:text-[#D4AF37] transition-colors">Home</Link>
-          <Link href="/tiles" className="text-[#1A1A1A] hover:text-[#D4AF37] transition-colors">All Tiles</Link>
-          <Link href="/profile" className="text-[#1A1A1A] hover:text-[#D4AF37] transition-colors">My Profile</Link>
-        </div>
-      </nav>
- 
       {/* Content */}
       <div className="flex-1 flex flex-col items-center justify-center text-center px-6">
  
@@ -50,13 +35,6 @@ const NotFound = () => {
         </div>
  
       </div>
- 
-      {/* Footer */}
-      <footer className="h-14 border-t border-[#e2e2e2] flex items-center justify-center">
-        <p className="font-[family-name:var(--font-inter)] text-[11px] text-[#aaa] tracking-widest uppercase">
-          AuraTiles © 2023
-        </p>
-      </footer>
  
     </div>
   );

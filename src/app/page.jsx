@@ -1,12 +1,11 @@
 import Banner from "@/components/Banner";
-import Footer from "@/components/Footer";
+import Marquee from "@/components/Marquee";
 
 const Home = () => {
   return (
     <div className="flex flex-col">
       <Banner />
-      {/*  */}
-      <Footer />
+      <Marquee />
     </div>
   );
 }

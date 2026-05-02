@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 const Banner = () => {
   return (
     <section className="relative bg-[#111] min-h-[480px] flex items-center overflow-hidden py-20">
@@ -60,19 +62,19 @@ const Banner = () => {
 
         {/* CTAs */}
         <div className="flex items-center gap-4 flex-wrap">
-          <a
-            href="/all-tiles"
+          <Link
+            href="/alltiles"
             className="bg-[#D4AF37] text-black text-sm font-semibold px-7 py-3 rounded-lg hover:opacity-90 transition-opacity"
           >
             Browse All Tiles
-          </a>
+          </Link>
           
-          <a
+          <Link
             href="/collections"
             className="text-sm text-white/60 hover:text-white border border-white/15 hover:border-white/35 px-5 py-3 rounded-lg transition-all"
           >
             View Collections →
-          </a>
+          </Link>
         </div>
 
         {/* Stats */}
@@ -93,20 +95,6 @@ const Banner = () => {
                 {s.label}
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Bottom ticker */}
-      <div className="absolute bottom-0 left-0 right-0 border-t border-white/[0.07] overflow-hidden py-2.5">
-        <div className="flex whitespace-nowrap animate-ticker">
-          {Array(2).fill([
-            "Ceramic","Porcelain","Mosaic","Terracotta",
-            "Geometric","Handmade","Marble Effect","Wood Look","Cement","Encaustic"
-          ]).flat().map((item, i) => (
-            <span key={i} className="text-[11px] tracking-widest uppercase text-white/25 px-8">
-              <span className="text-[#D4AF37]/40 mr-2">✦</span>{item}
-            </span>
           ))}
         </div>
       </div>

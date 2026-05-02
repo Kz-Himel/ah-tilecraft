@@ -84,7 +84,7 @@ const TileCard = ({ tile }) => {
                     : "bg-white/10 text-white/30 cursor-not-allowed"
                 }`}
             >
-              View <FaArrowRight />
+              Show Details <FaArrowRight />
             </button>
           </Link>
         </div>

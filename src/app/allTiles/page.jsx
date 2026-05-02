@@ -1,33 +1,10 @@
 import TileCard from "@/components/TileCard";
+import { getAllTiles } from "@/lib/tiles";
 
-const AllTiles = async () => {
+const AllTiles = () => {
   
-  const res = await fetch("http://localhost:5000/tiles");
-  const tiles = await res.json();
-
-  // try {
-  //   const res = await fetch("http://localhost:5000/tiles", {
-  //     cache: "no-store",
-  //   });
-
-  //   if (!res.ok) {
-  //     throw new Error("Failed to fetch tiles");
-  //   }
-
-  //   const tiles = await res.json();
-
-  //   console.log(tiles);
-  // } catch (error) {
-  //   return (
-  //     <section className="bg-[#0a0a0a] py-20 px-4">
-  //       <div className="max-w-7xl mx-auto w-full text-center">
-  //         <p className="text-red-400 text-sm">
-  //           Failed to load tiles. Please try again later.
-  //         </p>
-  //       </div>
-  //     </section>
-  //   );
-  // }
+  const tiles = getAllTiles();
+  console.log(tiles);
 
   return (
     <section className="bg-[#0a0a0a] py-20 px-4">

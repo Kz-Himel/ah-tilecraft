@@ -1,4 +1,4 @@
-import tilesData from "@/data/tiles.json";
+import tilesData from "@/data/tilesData.json";
 
 // All tiles
 export function getAllTiles() {

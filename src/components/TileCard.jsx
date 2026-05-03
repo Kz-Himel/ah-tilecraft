@@ -74,7 +74,7 @@ const TileCard = ({ tile }) => {
             {currency} {price}
           </div>
 
-          <Link href={`/tiles/${id}`} className="block">
+          <Link href={`/allTiles/${tile.id}`} className="block">
             <button
               disabled={!inStock}
               className={`w-full flex items-center justify-center gap-2 text-xs font-bold uppercase py-2 px-4 rounded-lg transition

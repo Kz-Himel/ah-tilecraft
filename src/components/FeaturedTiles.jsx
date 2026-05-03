@@ -7,7 +7,7 @@ import TileCard from "./TileCard";
 import { getFeaturedTiles } from "@/lib/tiles";
 
 const FeaturedTiles = () => {
-  const featuredTiles = getFeaturedTiles();
+  const featuredTiles = getFeaturedTiles() || [];
 
   return (
     <section className="bg-[#F8F9FA] px-6 py-16 md:px-10 lg:px-16">

@@ -4,7 +4,6 @@ import { getAllTiles } from "@/lib/tiles";
 const AllTiles = () => {
   
   const tiles = getAllTiles();
-  console.log(tiles);
 
   return (
     <section className="bg-[#0a0a0a] py-20 px-4">

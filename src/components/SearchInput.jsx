@@ -1,6 +1,5 @@
 "use client";
 
-import { Input, Button } from "@heroui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FiSearch } from "react-icons/fi";
 import { useEffect, useState, useCallback } from "react";
@@ -35,29 +34,28 @@ const SearchInput = () => {
   }, [text, handleSearch, searchParams]);
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-row items-center gap-2 w-full">
-      <Input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Search for tiles..."
-        size="lg"
-        radius="lg"
-        classNames={{
-          input: "text-white bg-transparent placeholder:text-white/30 text-sm",
-          inputWrapper:
-            "bg-[#1A1A1A] border border-white/10 hover:border-[#D4AF37] focus-within:border-[#D4AF37] transition-colors duration-200 h-14 shadow-none px-4",
-        }}
-      />
-      
-      <Button
-        type="submit"
-        className="h-14 px-6 bg-[#D4AF37] text-black font-bold hover:bg-[#b8962d] transition-colors"
-        radius="lg"
-        startContent={<FiSearch className="w-5 h-5" />}
-      >
-        Search
-      </Button>
+    <form onSubmit={onSubmit} className="w-full max-w-2xl mx-auto">
+      {/* Wrapper Div jeta Input ar Button ke dore rakhbe */}
+      <div className="relative flex items-center w-full h-14 bg-[#1A1A1A] border border-white/10 rounded-xl px-4 hover:border-[#D4AF37] focus-within:border-[#D4AF37] transition-all duration-200">
+        
+        {/* Real Input Tag */}
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Search for tiles by name, category..."
+          className="flex-grow bg-transparent text-white text-sm outline-none placeholder:text-white/30"
+        />
+
+        {/*  */}
+        <button 
+          type="submit"
+          className="flex items-center gap-2 bg-[#D4AF37] hover:bg-[#b8962d] text-black px-4 py-2 rounded-lg transition-colors font-semibold text-sm"
+        >
+          <FiSearch className="w-4 h-4" />
+          Search
+        </button>
+      </div>
     </form>
   );
 };

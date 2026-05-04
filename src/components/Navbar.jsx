@@ -42,11 +42,10 @@ const Navbar = () => {
             </li>
           ))}
 
-          {/* Only show when logged in */}
           {session && (
             <li>
               <Link
-                href="/(auth)/profile"
+                href="/profile"
                 className="text-sm font-medium text-[#D4AF37]"
               >
                 My Profile
@@ -58,21 +57,19 @@ const Navbar = () => {
         {/* Right Side */}
         <div className="flex items-center gap-3">
 
-          {/* Loading state */}
           {isPending ? (
             <div className="w-8 h-8 rounded-full bg-white/10 animate-pulse" />
           ) : !session ? (
-            // NOT LOGGED IN
             <div className="hidden md:flex items-center gap-3">
               <Link
-                href="/(auth)/login"
+                href="/login"
                 className="text-sm text-white/60 hover:text-white transition-colors"
               >
                 Login
               </Link>
               <Button
                 as={Link}
-                href="/(auth)/register"
+                href="/register"
                 size="sm"
                 className="bg-[#D4AF37] text-black font-semibold rounded-lg px-4"
               >
@@ -80,7 +77,6 @@ const Navbar = () => {
               </Button>
             </div>
           ) : (
-            // LOGGED IN
             <div className="hidden md:flex items-center gap-3">
               <Link href="/profile" className="flex items-center gap-2">
                 {session.user.image ? (
@@ -111,7 +107,6 @@ const Navbar = () => {
             </div>
           )}
 
-          {/* Mobile toggle */}
           <button
             className="md:hidden text-white/70 hover:text-white transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -137,7 +132,6 @@ const Navbar = () => {
               </li>
             ))}
 
-            {/* Only when logged in */}
             {session && (
               <li>
                 <Link

@@ -1,6 +1,6 @@
 "use client";
 
-import { Input } from "@heroui/react";
+import { Input, Button } from "@heroui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FiSearch } from "react-icons/fi";
 import { useEffect, useState, useCallback } from "react";
@@ -35,31 +35,29 @@ const SearchInput = () => {
   }, [text, handleSearch, searchParams]);
 
   return (
-    <form onSubmit={onSubmit} className="w-full">
+    <form onSubmit={onSubmit} className="flex flex-row items-center gap-2 w-full">
       <Input
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Search for tiles by name, category or material..."
+        placeholder="Search for tiles..."
         size="lg"
         radius="lg"
         classNames={{
           input: "text-white bg-transparent placeholder:text-white/30 text-sm",
           inputWrapper:
             "bg-[#1A1A1A] border border-white/10 hover:border-[#D4AF37] focus-within:border-[#D4AF37] transition-colors duration-200 h-14 shadow-none px-4",
-          // Inner content er space thik korar jonno
-          innerWrapper: "gap-3" 
         }}
-        endContent={
-          <button 
-            type="submit"
-            className="flex items-center gap-2 px-3 py-1 hover:bg-white/5 rounded-lg transition-colors group border border-white/10"
-          >
-            <span className="text-white/70 text-xs font-medium group-hover:text-[#D4AF37]">Search</span>
-            <FiSearch className="text-white/30 w-5 h-5 shrink-0 group-hover:text-[#D4AF37] transition-colors" />
-          </button>
-        }
       />
+      
+      <Button
+        type="submit"
+        className="h-14 px-6 bg-[#D4AF37] text-black font-bold hover:bg-[#b8962d] transition-colors"
+        radius="lg"
+        startContent={<FiSearch className="w-5 h-5" />}
+      >
+        Search
+      </Button>
     </form>
   );
 };

@@ -54,7 +54,7 @@ const SearchInput = () => {
           <button 
             type="submit" // 
             className="p-2 -mr-2 hover:bg-white/5 rounded-full transition-colors group"
-          >
+          > Search
             <FiSearch className="text-white/30 w-5 h-5 shrink-0 group-hover:text-[#D4AF37] transition-colors" />
           </button>
         }

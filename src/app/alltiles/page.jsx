@@ -1,14 +1,19 @@
 import { Suspense } from "react";
+import { FiSearch } from "react-icons/fi";
 import TileCard from "@/components/TileCard";
 import SearchInput from "@/components/SearchInput";
 import { getAllTiles } from "@/lib/tiles";
 
 const AllTiles = ({ searchParams }) => {
+  // ইউআরএল থেকে সার্চ কিউয়েরি নেওয়া
   const query = searchParams?.q?.toLowerCase() || "";
   const allTiles = getAllTiles();
 
+  // ফিল্টারিং লজিক: নাম, ক্যাটাগরি বা ম্যাটেরিয়াল সবকিছুর ওপর সার্চ কাজ করবে
   const tiles = allTiles.filter((tile) =>
-    tile.title.toLowerCase().includes(query)
+    tile.title.toLowerCase().includes(query) ||
+    tile.category?.toLowerCase().includes(query) ||
+    tile.material?.toLowerCase().includes(query)
   );
 
   return (
@@ -25,13 +30,14 @@ const AllTiles = ({ searchParams }) => {
           </p>
 
           <div className="max-w-2xl mx-auto">
-            <Suspense>
+            {/* Suspense ইম্পরট্যান্ট কারণ SearchInput useSearchParams ব্যবহার করে */}
+            <Suspense fallback={<div className="h-14 bg-[#1A1A1A] animate-pulse rounded-lg"/>}>
               <SearchInput />
             </Suspense>
           </div>
 
           {query && (
-            <p className="text-white/40 text-xs mt-4">
+            <p className="text-white/40 text-xs mt-4 animate-in fade-in duration-500">
               Results for{" "}
               <span className="text-[#D4AF37] font-semibold">
                 &quot;{query}&quot;
@@ -41,11 +47,11 @@ const AllTiles = ({ searchParams }) => {
           )}
         </div>
 
-        {/* Grid */}
+        {/* Grid / Empty State */}
         {tiles.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-24 text-center">
+          <div className="flex flex-col items-center justify-center py-24 text-center border border-white/5 rounded-3xl bg-[#111]/50">
             <div className="w-16 h-16 rounded-xl bg-[#1A1A1A] flex items-center justify-center mb-4 border border-white/10">
-              <span className="text-2xl">🔍</span>
+              <FiSearch className="text-white/20 text-2xl" />
             </div>
             <p className="text-white font-semibold mb-1">No tiles found</p>
             <p className="text-white/40 text-sm">

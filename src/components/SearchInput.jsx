@@ -20,7 +20,6 @@ const SearchInput = () => {
     router.push(`/alltiles?${params.toString()}`, { scroll: false });
   }, [router]);
 
-  // Enter button 
   const onSubmit = (e) => {
     e.preventDefault();
     handleSearch(text);
@@ -48,13 +47,15 @@ const SearchInput = () => {
           input: "text-white bg-transparent placeholder:text-white/30 text-sm",
           inputWrapper:
             "bg-[#1A1A1A] border border-white/10 hover:border-[#D4AF37] focus-within:border-[#D4AF37] transition-colors duration-200 h-14 shadow-none px-4",
+          // Inner content er space thik korar jonno
+          innerWrapper: "gap-3" 
         }}
-        // 
         endContent={
           <button 
-            type="submit" // 
-            className="p-2 -mr-2 hover:bg-white/5 rounded-full transition-colors group"
-          > Search
+            type="submit"
+            className="flex items-center gap-2 px-3 py-1 hover:bg-white/5 rounded-lg transition-colors group border border-white/10"
+          >
+            <span className="text-white/70 text-xs font-medium group-hover:text-[#D4AF37]">Search</span>
             <FiSearch className="text-white/30 w-5 h-5 shrink-0 group-hover:text-[#D4AF37] transition-colors" />
           </button>
         }

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@heroui/react";
 import { useSession, signOut } from "@/lib/auth-client";
+import Image from "next/image";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,7 +12,7 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Home", href: "/" },
-    { label: "All Tiles", href: "/allTiles" },
+    { label: "All Tiles", href: "/alltiles" },
   ];
 
   const handleSignOut = async () => {
@@ -79,9 +80,9 @@ const Navbar = () => {
           ) : (
             <div className="hidden md:flex items-center gap-3">
               <Link href="/profile" className="flex items-center gap-2">
-                {session.user.image ? (
-                  <img
-                    src={session.user.image}
+                {session.user?.image ? (
+                  <Image
+                    src={session.user?.image}
                     alt={session.user.name || "User"}
                     className="w-8 h-8 rounded-full object-cover"
                   />

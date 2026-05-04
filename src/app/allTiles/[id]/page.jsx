@@ -45,8 +45,8 @@ function DetailRow({ label, value }) {
 }
 
 // ✅ Main Page (FIXED)
-const TileDetailPage = ({ params }) => {
-  const { id } = params;
+const TileDetailPage = async ({ params }) => {
+  const { id } = await params;
 
   const tile = getTileById(id);
 

@@ -2,11 +2,11 @@
 const nextConfig = {
   /* config options here */
   reactCompiler: true,
-  image: {
+  images: {
     remotePatterns: [
       {
         protocol: "https",
-        pathname: "**"
+        hostname: "**",
       },
     ],
   },

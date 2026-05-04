@@ -5,7 +5,7 @@ import { getTileById, getAllTiles } from "@/lib/tiles";
 import { FaArrowLeft, FaCheck, FaXmark } from "react-icons/fa6";
 import { Chip } from "@heroui/react";
 
-// ✅ Generate Static Params
+//  Generate Static Params
 export async function generateStaticParams() {
   const tiles = getAllTiles();
 
@@ -14,7 +14,7 @@ export async function generateStaticParams() {
   }));
 }
 
-// ✅ Metadata (FIXED: no await params)
+//  Metadata (FIXED: no await params)
 export async function generateMetadata({ params }) {
   const { id } = params;
 
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-// ✅ Reusable Row Component
+//  Reusable Row Component
 function DetailRow({ label, value }) {
   return (
     <div className="flex items-center justify-between border-b border-white/10 py-3">
@@ -44,13 +44,13 @@ function DetailRow({ label, value }) {
   );
 }
 
-// ✅ Main Page (FIXED)
+//  Main Page (FIXED)
 const TileDetailPage = async ({ params }) => {
   const { id } = await params;
 
   const tile = getTileById(id);
 
-  // ❗ Important: prevents crash
+  //  Important: prevents crash
   if (!tile) {
     notFound();
   }

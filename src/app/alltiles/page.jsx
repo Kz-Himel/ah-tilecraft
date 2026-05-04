@@ -4,12 +4,16 @@ import TileCard from "@/components/TileCard";
 import SearchInput from "@/components/SearchInput";
 import { getAllTiles } from "@/lib/tiles";
 
-const AllTiles = ({ searchParams }) => {
-  // ইউআরএল থেকে সার্চ কিউয়েরি নেওয়া
-  const query = searchParams?.q?.toLowerCase() || "";
+// 
+const AllTiles = async ({ searchParams }) => {
+  
+  // 
+  const params = await searchParams;
+  const query = params?.q?.toLowerCase() || "";
+  
   const allTiles = getAllTiles();
 
-  // ফিল্টারিং লজিক: নাম, ক্যাটাগরি বা ম্যাটেরিয়াল সবকিছুর ওপর সার্চ কাজ করবে
+  // 
   const tiles = allTiles.filter((tile) =>
     tile.title.toLowerCase().includes(query) ||
     tile.category?.toLowerCase().includes(query) ||
@@ -30,8 +34,8 @@ const AllTiles = ({ searchParams }) => {
           </p>
 
           <div className="max-w-2xl mx-auto">
-            {/* Suspense ইম্পরট্যান্ট কারণ SearchInput useSearchParams ব্যবহার করে */}
-            <Suspense fallback={<div className="h-14 bg-[#1A1A1A] animate-pulse rounded-lg"/>}>
+            {/* key={query} */}
+            <Suspense key={query} fallback={<div className="h-14 bg-[#1A1A1A] animate-pulse rounded-lg"/>}>
               <SearchInput />
             </Suspense>
           </div>

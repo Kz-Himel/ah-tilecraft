@@ -5,26 +5,34 @@ import { getTileById, getAllTiles } from "@/lib/tiles";
 import { FaArrowLeft, FaCheck, FaXmark } from "react-icons/fa6";
 import { Chip } from "@heroui/react";
 
-// Generate Static Params
+// ✅ Generate Static Params
 export async function generateStaticParams() {
   const tiles = getAllTiles();
-  return tiles.map((tile) => ({ id: tile.id }));
+
+  return tiles.map((tile) => ({
+    id: tile.id, // must match URL exactly
+  }));
 }
 
-// Metadata
+// ✅ Metadata (FIXED: no await params)
 export async function generateMetadata({ params }) {
-  const { id } = await params;           // ← এখানে await করা হয়েছে
+  const { id } = params;
+
   const tile = getTileById(id);
-  
-  if (!tile) return { title: "Tile Not Found" };
+
+  if (!tile) {
+    return {
+      title: "Tile Not Found",
+    };
+  }
 
   return {
     title: `${tile.title} | AH TileCraft`,
     description: tile.description,
   };
-};
+}
 
-// Detail Row
+// ✅ Reusable Row Component
 function DetailRow({ label, value }) {
   return (
     <div className="flex items-center justify-between border-b border-white/10 py-3">
@@ -34,14 +42,18 @@ function DetailRow({ label, value }) {
       <span className="text-white/90 text-sm font-medium">{value}</span>
     </div>
   );
-};
+}
 
-// Main Page
-const TileDetailPage = async ({ params }) => {     // ← async করা হয়েছে
-  const { id } = await params;                    // ← await করা হয়েছে
+// ✅ Main Page (FIXED)
+const TileDetailPage = ({ params }) => {
+  const { id } = params;
+
   const tile = getTileById(id);
 
-  if (!tile) notFound();
+  // ❗ Important: prevents crash
+  if (!tile) {
+    notFound();
+  }
 
   const {
     title,
@@ -57,7 +69,6 @@ const TileDetailPage = async ({ params }) => {     // ← async করা হয়
 
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
-
       {/* Top Bar */}
       <div className="border-b border-white/10 px-4 md:px-10 lg:px-16 py-4">
         <Link
@@ -72,8 +83,8 @@ const TileDetailPage = async ({ params }) => {     // ← async করা হয়
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-10 lg:px-16 py-12 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-
-          {/* Image Section */}
+          
+          {/* Image */}
           <div className="relative">
             <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-[#1A1A1A]">
               <Image
@@ -97,9 +108,9 @@ const TileDetailPage = async ({ params }) => {     // ← async করা হয়
             <div className="absolute -bottom-4 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-40" />
           </div>
 
-          {/* Info Section */}
+          {/* Info */}
           <div className="flex flex-col gap-6">
-
+            
             <div className="flex items-center gap-3 flex-wrap">
               <Chip className="bg-[#D4AF37] text-black text-[10px] font-bold uppercase px-3 h-6">
                 {category}
@@ -147,10 +158,11 @@ const TileDetailPage = async ({ params }) => {     // ← async করা হয়
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <button
                 disabled={!inStock}
-                className={`flex-1 py-3 px-6 rounded-lg text-sm font-bold uppercase tracking-widest transition-all duration-200
-                  ${inStock
-                    ? "bg-[#D4AF37] text-black hover:bg-[#b8962e] active:scale-95"
-                    : "bg-white/10 text-white/30 cursor-not-allowed"
+                className={`flex-1 py-3 px-6 rounded-lg text-sm font-bold uppercase tracking-widest transition
+                  ${
+                    inStock
+                      ? "bg-[#D4AF37] text-black hover:bg-[#b8962e]"
+                      : "bg-white/10 text-white/30 cursor-not-allowed"
                   }`}
               >
                 {inStock ? "Add to Cart" : "Unavailable"}
@@ -158,10 +170,11 @@ const TileDetailPage = async ({ params }) => {     // ← async করা হয়
 
               <button
                 disabled={!inStock}
-                className={`flex-1 py-3 px-6 rounded-lg text-sm font-bold uppercase tracking-widest border transition-all duration-200
-                  ${inStock
-                    ? "border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37]/10 active:scale-95"
-                    : "border-white/10 text-white/20 cursor-not-allowed"
+                className={`flex-1 py-3 px-6 rounded-lg text-sm font-bold uppercase tracking-widest border transition
+                  ${
+                    inStock
+                      ? "border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37]/10"
+                      : "border-white/10 text-white/20 cursor-not-allowed"
                   }`}
               >
                 Request Sample

@@ -16,6 +16,7 @@ export function getFeaturedTiles() {
 }
 
 // Single tile by id
-export function getTileById(id) {
-  return tiles.find((tile) => tile.id === id) ?? null;
-}
+export const getTileById = (id) => {
+  const tiles = getAllTiles();
+  return tiles.find((tile) => tile.id === id); 
+};

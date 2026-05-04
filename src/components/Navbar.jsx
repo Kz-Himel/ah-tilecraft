@@ -14,6 +14,11 @@ const Navbar = () => {
     { label: "All Tiles", href: "/allTiles" },
   ];
 
+  const handleSignOut = async () => {
+    await signOut();
+    window.location.href = "/";
+  };
+
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#1A1A1A]/90 backdrop-blur-lg">
       <header className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-8">
@@ -37,11 +42,11 @@ const Navbar = () => {
             </li>
           ))}
 
-          {/* 👇 Only show when logged in */}
+          {/* Only show when logged in */}
           {session && (
             <li>
               <Link
-                href="/profile"
+                href="/(auth)/profile"
                 className="text-sm font-medium text-[#D4AF37]"
               >
                 My Profile
@@ -53,19 +58,21 @@ const Navbar = () => {
         {/* Right Side */}
         <div className="flex items-center gap-3">
 
-          {/* ⏳ Loading state */}
-          {isPending ? null : !session ? (
-            // ❌ NOT LOGGED IN
+          {/* Loading state */}
+          {isPending ? (
+            <div className="w-8 h-8 rounded-full bg-white/10 animate-pulse" />
+          ) : !session ? (
+            // NOT LOGGED IN
             <div className="hidden md:flex items-center gap-3">
               <Link
-                href="/login"
+                href="/(auth)/login"
                 className="text-sm text-white/60 hover:text-white transition-colors"
               >
                 Login
               </Link>
               <Button
                 as={Link}
-                href="/register"
+                href="/(auth)/register"
                 size="sm"
                 className="bg-[#D4AF37] text-black font-semibold rounded-lg px-4"
               >
@@ -73,13 +80,22 @@ const Navbar = () => {
               </Button>
             </div>
           ) : (
-            // ✅ LOGGED IN
+            // LOGGED IN
             <div className="hidden md:flex items-center gap-3">
               <Link href="/profile" className="flex items-center gap-2">
-                <img
-                  src={session.user.image || "/default.png"}
-                  className="w-8 h-8 rounded-full"
-                />
+                {session.user.image ? (
+                  <img
+                    src={session.user.image}
+                    alt={session.user.name || "User"}
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-[#D4AF37] flex items-center justify-center text-black text-sm font-bold">
+                    {session.user.name?.[0]?.toUpperCase() ||
+                      session.user.email?.[0]?.toUpperCase() ||
+                      "U"}
+                  </div>
+                )}
                 <span className="text-sm text-white">
                   {session.user.name}
                 </span>
@@ -88,7 +104,7 @@ const Navbar = () => {
               <Button
                 size="sm"
                 className="bg-red-500 text-white"
-                onPress={() => signOut({ callbackURL: "/" })}
+                onPress={handleSignOut}
               >
                 Logout
               </Button>
@@ -121,7 +137,7 @@ const Navbar = () => {
               </li>
             ))}
 
-            {/* 👇 Only when logged in */}
+            {/* Only when logged in */}
             {session && (
               <li>
                 <Link
@@ -156,17 +172,15 @@ const Navbar = () => {
                 </Button>
               </>
             ) : (
-              <>
-                <button
-                  onClick={() => {
-                    signOut({ callbackURL: "/" });
-                    setIsMenuOpen(false);
-                  }}
-                  className="text-red-400 text-sm"
-                >
-                  Logout
-                </button>
-              </>
+              <button
+                onClick={() => {
+                  handleSignOut();
+                  setIsMenuOpen(false);
+                }}
+                className="text-red-400 text-sm"
+              >
+                Logout
+              </button>
             )}
           </div>
         </div>

@@ -17,7 +17,7 @@ export async function proxy(request) {
   const isProfilePage = pathname === "/profile";
 
   const isProductDetailPage =
-    pathname.startsWith("/products/") && pathname !== "/products";
+    pathname.startsWith("/alltiles/") && pathname !== "/alltiles";
 
   if (!session && (isProfilePage || isProductDetailPage)) {
     return NextResponse.redirect(new URL("/login", request.url));

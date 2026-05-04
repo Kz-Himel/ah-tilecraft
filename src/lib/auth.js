@@ -1,34 +1,17 @@
 import { betterAuth } from "better-auth";
+import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
-import { db } from "./db";
+
+const client = new MongoClient(process.env.MONGO_URI);
+const db = client.db();
 
 export const auth = betterAuth({
-  database: mongodbAdapter(db),
+  database: mongodbAdapter(db, {
+    // Optional: if you don't provide a client, database transactions won't be enabled.
+    client
+  }),
 
-  emailAndPassword: {
-    enabled: true,
-    requireEmailVerification: false,
-  },
-
-  socialProviders: {
-    google: {
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    },
-  },
-
-  user: {
-    additionalFields: {
-      photoURL: {
-        type: "string",
-        required: false,
-        defaultValue: "",
-      },
-    },
-  },
-
-  session: {
-    expiresIn: 60 * 60 * 24 * 7,
-    updateAge: 60 * 60 * 24,
+  emailAndPassword: { 
+    enabled: true, 
   },
 });

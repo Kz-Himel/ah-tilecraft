@@ -7,10 +7,9 @@ export async function PATCH(req) {
   try {
     await dbConnect();
 
-    // 🔐 get session
     const session = await auth();
 
-    if (!session?.user?.id) {
+    if (!session?.user?.email) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
@@ -19,20 +18,14 @@ export async function PATCH(req) {
 
     const body = await req.json();
 
-    if (!body.name) {
-      return NextResponse.json(
-        { error: "Name is required" },
-        { status: 400 }
-      );
-    }
+    const updateData = {};
 
-    // IMPORTANT FIX:
-    // Better Auth user id usually matches DB "id" or "email"
-    // safer approach = find by email
+    if (body.name) updateData.name = body.name;
+    if (body.image) updateData.image = body.image;
 
     const updatedUser = await User.findOneAndUpdate(
-      { email: session.user.email }, // SAFE KEY
-      { $set: { name: body.name } },
+      { email: session.user.email },
+      { $set: updateData },
       { new: true }
     );
 
@@ -47,11 +40,12 @@ export async function PATCH(req) {
       success: true,
       user: updatedUser,
     });
+
   } catch (err) {
-    console.error("UPDATE_USER_ERROR:", err);
+    console.error(err);
 
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: "Server Error" },
       { status: 500 }
     );
   }

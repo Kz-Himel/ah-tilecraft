@@ -14,17 +14,15 @@ export default function ProfilePage() {
 
   const [formData, setFormData] = useState({
     name: "",
+    image: "",
   });
 
-  //  Redirect only
+  //  Redirect if not logged in
   useEffect(() => {
     if (!isPending && !session) {
       router.push("/login");
     }
   }, [session, isPending, router]);
-
-  //  IMPORTANT FIX:
-  //  removed session sync useEffect completely
 
   const handleSignOut = async () => {
     await signOut();
@@ -41,10 +39,11 @@ export default function ProfilePage() {
     }));
   };
 
-  // ✏️ EDIT START (safe init here)
+  // ✏️ START EDIT
   const handleEditStart = () => {
     setFormData({
       name: session?.user?.name || "",
+      image: session?.user?.image || "",
     });
 
     setIsEditing(true);
@@ -92,9 +91,12 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-gray-950 py-12 px-4">
       <div className="max-w-lg mx-auto">
         <div className="bg-gray-900 rounded-2xl border border-gray-800 shadow-xl overflow-hidden">
+
           <div className="h-24 bg-gradient-to-r from-blue-600 to-purple-600" />
 
           <div className="px-8 pb-8">
+
+            {/* Avatar */}
             <div className="-mt-12 mb-6">
               {user.image ? (
                 <Image
@@ -111,6 +113,7 @@ export default function ProfilePage() {
               )}
             </div>
 
+            {/* VIEW MODE */}
             {!isEditing ? (
               <>
                 <h1 className="text-2xl font-bold text-white mb-1">
@@ -135,21 +138,23 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                {/* EDIT */}
+                {/* EDIT BUTTON */}
                 <button
                   onClick={handleEditStart}
                   className="mt-6 w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg"
                 >
                   <FiEdit2 />
-                  Edit Profile
+                  Update Information
                 </button>
               </>
             ) : (
               <>
+                {/* EDIT MODE */}
                 <h1 className="text-xl text-white mb-4">
-                  Edit Profile
+                  Update Information
                 </h1>
 
+                {/* NAME */}
                 <input
                   name="name"
                   value={formData.name}
@@ -158,12 +163,21 @@ export default function ProfilePage() {
                   placeholder="Name"
                 />
 
+                {/* IMAGE */}
+                <input
+                  name="image"
+                  value={formData.image}
+                  onChange={handleChange}
+                  className="w-full mb-3 p-2 rounded bg-gray-800 text-white"
+                  placeholder="Image URL (https://...)"
+                />
+
                 <div className="flex gap-2">
                   <button
                     onClick={handleSave}
                     className="flex-1 bg-green-600 py-2 rounded"
                   >
-                    Save
+                    Update Information
                   </button>
 
                   <button
@@ -184,6 +198,7 @@ export default function ProfilePage() {
               <FiLogOut />
               Sign Out
             </button>
+
           </div>
         </div>
       </div>

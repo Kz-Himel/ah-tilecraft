@@ -68,14 +68,12 @@ const Navbar = () => {
               >
                 Login
               </Link>
-              <Button
-                as={Link}
-                href="/register"
-                size="sm"
-                className="bg-[#D4AF37] text-black font-semibold rounded-lg px-4"
+              <Link 
+              href="/register"
+              className="bg-[#D4AF37] text-black font-semibold rounded-lg px-4"
               >
                 Register
-              </Button>
+              </Link>
             </div>
           ) : (
             <div className="hidden md:flex items-center gap-3">

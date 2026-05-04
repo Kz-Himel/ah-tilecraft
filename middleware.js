@@ -7,18 +7,20 @@ export async function middleware(req) {
   });
 
   const isLoggedIn = !!session;
+  const path = req.nextUrl.pathname;
 
-  const protectedRoutes = ["/profile"];
+  // only protect profile and single tile pages
+  const isProtected =
+    path.startsWith("/profile") ||
+    (path.startsWith("/alltiles/") && path !== "/alltiles");
 
-  if (protectedRoutes.includes(req.nextUrl.pathname)) {
-    if (!isLoggedIn) {
-      return NextResponse.redirect(new URL("/login", req.url));
-    }
+  if (isProtected && !isLoggedIn) {
+    return NextResponse.redirect(new URL("/login", req.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/profile"],
+  matcher: ["/profile", "/alltiles/:path*"],
 };

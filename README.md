@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏠 AH TileCraft
 
-## Getting Started
+A modern full-stack tile showroom web application built with Next.js.  
+It showcases premium tile collections with authentication and protected product details.
 
-First, run the development server:
+---
+
+## 🎯 Project Purpose
+
+AH TileCraft is a tile showcase platform where users can browse tile collections.  
+Only logged-in users can access detailed tile information, while the main catalog remains public.
+
+---
+
+## 🌐 Live Demo
+
+🔗 Live URL: https://your-live-link.com
+
+---
+
+## ✨ Features
+
+- 🔐 User authentication system
+- 🧱 Public tile listing page
+- 📄 Protected tile details page
+- ⚡ Dynamic routing with Next.js App Router
+- 🎨 Modern responsive UI design
+- 📱 Fully mobile-friendly layout
+- 🧩 Clean component-based architecture
+
+---
+
+## 🛠️ Tech Stack
+
+- Next.js
+- React
+- Tailwind CSS
+- HeroUI (@heroui/react)
+- React Icons
+- Next.js Middleware (route protection)
+- Better Auth
+- Custom Authentication (lib/auth)
+
+---
+
+## 🚀 Installation & Setup
 
 ```bash
+git clone https://github.com/Kz-Himel/ah-tilecraft.git
+cd ah-tilecraft
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+👨‍💻 Author  
+  
+Himel  
+GitHub: https://github.com/Kz-Himel  

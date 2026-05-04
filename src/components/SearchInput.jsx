@@ -20,7 +20,7 @@ const SearchInput = () => {
     router.push(`/alltiles?${params.toString()}`, { scroll: false });
   }, [router]);
 
-  // 
+  // Enter button 
   const onSubmit = (e) => {
     e.preventDefault();
     handleSearch(text);

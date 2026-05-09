@@ -47,10 +47,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4">
-      <div className="w-full max-w-md bg-gray-900 rounded-2xl shadow-xl p-8 border border-gray-800">
+    <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4 py-10">
+      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl shadow-2xl p-6 sm:p-8">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 sm:mb-10">
           <h1 className="text-3xl font-bold text-white">Welcome Back</h1>
           <p className="text-gray-400 mt-2 text-sm">
             Sign in to your AH Tilecraft account
@@ -79,7 +79,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full bg-gray-800 border border-gray-700 rounded-lg pl-10 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                className="w-full bg-white/[0.03] border border-white/10 rounded-xl h-12 pl-10 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]/50 focus:bg-white/[0.05] transition"
               />
             </div>
           </div>
@@ -97,7 +97,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-gray-800 border border-gray-700 rounded-lg pl-10 pr-10 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                className="w-full bg-white/[0.03] border border-white/10 rounded-xl h-12 pl-10 pr-10 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]/50 focus:bg-white/[0.05] transition"
               />
               <button
                 type="button"
@@ -113,7 +113,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-500 disabled:bg-blue-800 disabled:cursor-not-allowed text-white font-semibold py-2.5 rounded-lg transition"
+            className="w-full bg-[#D4AF37] hover:bg-[#c9a32d] text-black h-12 rounded-xl disabled:bg-blue-800 disabled:cursor-not-allowed text-white font-semibold py-2.5 rounded-lg transition"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
@@ -121,7 +121,7 @@ export default function LoginPage() {
 
         {/* Divider */}
         <div className="flex items-center my-6">
-          <div className="flex-1 border-t border-gray-700" />
+          <div className="flex-1 border-t bg-white/10" />
           <span className="px-3 text-xs text-gray-500 uppercase tracking-wider">
             or
           </span>
@@ -132,7 +132,7 @@ export default function LoginPage() {
         <button
           onClick={handleGoogleLogin}
           disabled={googleLoading}
-          className="w-full flex items-center justify-center gap-3 bg-gray-800 hover:bg-gray-700 disabled:opacity-60 disabled:cursor-not-allowed border border-gray-700 text-white font-medium py-2.5 rounded-lg transition"
+          className="w-full flex items-center justify-center gap-3 bg-white/[0.03] border border-white/10 h-12 rounded-xl disabled:opacity-60 disabled:cursor-not-allowed border border-gray-700 text-white font-medium py-2.5 rounded-lg transition"
         >
           <FcGoogle className="text-xl" />
           {googleLoading ? "Redirecting..." : "Continue with Google"}

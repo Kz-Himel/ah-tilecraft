@@ -34,10 +34,7 @@ const AllTiles = async ({ searchParams }) => {
           </p>
 
           <div className="max-w-2xl mx-auto">
-            {/* key={query} */}
-            <Suspense key={query} fallback={<div className="h-14 bg-[#1A1A1A] animate-pulse rounded-lg"/>}>
-              <SearchInput />
-            </Suspense>
+            <SearchInput />
           </div>
 
           {query && (

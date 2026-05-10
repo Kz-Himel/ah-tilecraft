@@ -37,7 +37,7 @@ Only logged-in users can access detailed tile information, while the main catalo
 - Tailwind CSS
 - HeroUI (@heroui/react)
 - React Icons
-- Next.js Middleware (route protection)
+- Next.js Proxy (route protection)
 - Better Auth
 - Custom Authentication (lib/auth)
 

@@ -218,6 +218,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FiUser, FiMail, FiLogOut, FiEdit2 } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 export default function ProfilePage() {
   const { data: session, isPending, refetch } = useSession(); // ✅
@@ -271,11 +272,13 @@ export default function ProfilePage() {
       const data = await res.json();
 
       if (!res.ok) {
+        toast.error(data.error || "Update failed");
         throw new Error(data.error || "Update failed");
       }
 
       setIsEditing(false);
-      await refetch(); // ✅
+      await refetch(); 
+      toast.success("Profile updated successfully!");
 
     } catch (err) {
       console.log(err?.message || err);

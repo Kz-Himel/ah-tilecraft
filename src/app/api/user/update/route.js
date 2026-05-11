@@ -1,4 +1,3 @@
-// User model import সরিয়ে directly better-auth দিয়ে update করুন
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
@@ -23,7 +22,7 @@ export async function PATCH(req) {
       return NextResponse.json({ error: "Nothing to update" }, { status: 400 });
     }
 
-    // ✅ better-auth এর built-in update use করুন
+    // better-auth built-in update use 
     const updatedUser = await auth.api.updateUser({
       headers: await headers(),
       body: updateData,

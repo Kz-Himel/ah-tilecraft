@@ -6,6 +6,7 @@ import Link from "next/link";
 import { signUp, signIn } from "@/lib/auth-client";
 import { FcGoogle } from "react-icons/fc";
 import { FiMail, FiLock, FiUser, FiEye, FiEyeOff } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -32,6 +33,7 @@ export default function RegisterPage() {
     if (error) {
       setError(error.message || "Registration failed. Please try again.");
     } else {
+      toast.success("Account created successfully!");
       router.push("/");
       router.refresh();
     }

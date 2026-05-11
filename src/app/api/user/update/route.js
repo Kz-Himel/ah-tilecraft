@@ -1,145 +1,38 @@
-// import { NextResponse } from "next/server";
-// import dbConnect from "@/lib/db";
-// import User from "@/models/User";
-// import { auth } from "@/lib/auth";
-
-// export async function PATCH(req) {
-//   try {
-//     await dbConnect();
-
-//     const session = await auth();
-
-//     // AUTH CHECK 
-//     if (!session?.user?.email) {
-//       return NextResponse.json(
-//         { error: "Unauthorized" },
-//         { status: 401 }
-//       );
-//     }
-
-//     let body;
-
-//     try {
-//       body = await req.json();
-//     } catch (parseError) {
-//       return NextResponse.json(
-//         { error: "Invalid request body" },
-//         { status: 400 }
-//       );
-//     }
-
-//     const updateData = {};
-
-//     if (body?.name?.trim()) {
-//       updateData.name = body.name.trim();
-//     }
-
-//     if (body?.image?.trim()) {
-//       updateData.image = body.image.trim();
-//     }
-
-//     // Nothing to update check
-//     if (Object.keys(updateData).length === 0) {
-//       return NextResponse.json(
-//         { error: "Nothing to update" },
-//         { status: 400 }
-//       );
-//     }
-
-//     const updatedUser = await User.findOneAndUpdate(
-//       { email: session.user.email },
-//       { $set: updateData },
-//       { new: true }
-//     );
-
-//     if (!updatedUser) {
-//       return NextResponse.json(
-//         { error: "User not found" },
-//         { status: 404 }
-//       );
-//     }
-
-//     return NextResponse.json({
-//       success: true,
-//       user: updatedUser,
-//     });
-
-//   } catch (err) {
-//     console.error("UPDATE USER ERROR:", err);
-
-//     return NextResponse.json(
-//       {
-//         error: err.message || "Server Error",
-//       },
-//       { status: 500 }
-//     );
-//   }
-// }
-
-
-
-import { NextResponse } from "next/server";
-import dbConnect from "@/lib/db";
-import User from "@/models/User";
+// User model import সরিয়ে directly better-auth দিয়ে update করুন
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { NextResponse } from "next/server";
 
 export async function PATCH(req) {
   try {
-    await dbConnect();
-
     const session = await auth.api.getSession({
       headers: await headers(),
     });
 
     if (!session?.user?.email) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    let body;
-    try {
-      body = await req.json();
-    } catch {
-      return NextResponse.json(
-        { error: "Invalid request body" },
-        { status: 400 }
-      );
-    }
+    const body = await req.json();
 
     const updateData = {};
     if (body?.name?.trim()) updateData.name = body.name.trim();
     if (body?.image?.trim()) updateData.image = body.image.trim();
 
     if (Object.keys(updateData).length === 0) {
-      return NextResponse.json(
-        { error: "Nothing to update" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Nothing to update" }, { status: 400 });
     }
 
-    const updatedUser = await User.findOneAndUpdate(
-      { email: session.user.email },
-      { $set: updateData },
-      { new: true }
-    );
-
-    if (!updatedUser) {
-      return NextResponse.json(
-        { error: "User not found" },
-        { status: 404 }
-      );
-    }
+    // ✅ better-auth এর built-in update use করুন
+    const updatedUser = await auth.api.updateUser({
+      headers: await headers(),
+      body: updateData,
+    });
 
     return NextResponse.json({ success: true, user: updatedUser });
 
   } catch (err) {
     console.error("UPDATE USER ERROR:", err);
-    return NextResponse.json(
-      { error: err.message || "Server Error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: err.message || "Server Error" }, { status: 500 });
   }
 }

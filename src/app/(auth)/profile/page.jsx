@@ -39,7 +39,7 @@ export default function ProfilePage() {
     }));
   };
 
-  // ✏️ START EDIT
+  //  START EDIT
   const handleEditStart = () => {
     setFormData({
       name: session?.user?.name || "",
@@ -51,24 +51,28 @@ export default function ProfilePage() {
 
   //  SAVE
   const handleSave = async () => {
-    try {
-      const res = await fetch("/api/user/update", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+  try {
+    const res = await fetch("/api/user/update", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-      if (!res.ok) throw new Error("Update failed");
+    const data = await res.json();
 
-      setIsEditing(false);
-
-      router.refresh();
-    } catch (err) {
-      alert("Update failed");
+    if (!res.ok) {
+      throw new Error(data.message || "Update failed");
     }
-  };
+
+    setIsEditing(false);
+    router.refresh();
+
+  } catch (err) {
+  console.log(err?.message || err);
+}
+};
 
   if (isPending) {
     return (

@@ -16,6 +16,8 @@ export async function PATCH(req) {
       );
     }
 
+    console.log(session);
+
     const body = await req.json();
 
     const updateData = {};

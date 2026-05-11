@@ -72,7 +72,7 @@ const TileDetailPage = async ({ params }) => {
       {/* Top Bar */}
       <div className="border-b border-white/10 px-4 md:px-10 lg:px-16 py-4">
         <Link
-          href="/allTiles"
+          href="/alltiles"
           className="inline-flex items-center gap-2 text-white/50 hover:text-[#D4AF37] transition-colors text-sm font-medium"
         >
           <FaArrowLeft className="text-xs" />

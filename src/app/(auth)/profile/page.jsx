@@ -63,7 +63,7 @@ export default function ProfilePage() {
     const data = await res.json();
 
     if (!res.ok) {
-      throw new Error(data.message || "Update failed");
+      throw new Error(data.error || "Update failed");
     }
 
     setIsEditing(false);

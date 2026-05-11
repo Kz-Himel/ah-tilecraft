@@ -9,6 +9,7 @@ export async function PATCH(req) {
 
     const session = await auth();
 
+    // AUTH CHECK 
     if (!session?.user?.email) {
       return NextResponse.json(
         { error: "Unauthorized" },
@@ -16,14 +17,34 @@ export async function PATCH(req) {
       );
     }
 
-    console.log(session);
+    let body;
 
-    const body = await req.json();
+    try {
+      body = await req.json();
+    } catch (parseError) {
+      return NextResponse.json(
+        { error: "Invalid request body" },
+        { status: 400 }
+      );
+    }
 
     const updateData = {};
 
-    if (body.name) updateData.name = body.name;
-    if (body.image) updateData.image = body.image;
+    if (body?.name?.trim()) {
+      updateData.name = body.name.trim();
+    }
+
+    if (body?.image?.trim()) {
+      updateData.image = body.image.trim();
+    }
+
+    // Nothing to update check
+    if (Object.keys(updateData).length === 0) {
+      return NextResponse.json(
+        { error: "Nothing to update" },
+        { status: 400 }
+      );
+    }
 
     const updatedUser = await User.findOneAndUpdate(
       { email: session.user.email },
@@ -44,10 +65,12 @@ export async function PATCH(req) {
     });
 
   } catch (err) {
-    console.error(err);
+    console.error("UPDATE USER ERROR:", err);
 
     return NextResponse.json(
-      { error: "Server Error" },
+      {
+        error: err.message || "Server Error",
+      },
       { status: 500 }
     );
   }

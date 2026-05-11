@@ -1,7 +1,7 @@
 "use client";
 
 import { useSpring, animated } from "@react-spring/web";
-export function SpinnerLoader({ text = "Crafting your experience" }) {
+const SpinnerLoader = ({ text = "Crafting your experience" }) => {
   const spinnerStyle = useSpring({
     loop: true,
     from: { rotate: 0 },
@@ -74,3 +74,5 @@ export function SpinnerLoader({ text = "Crafting your experience" }) {
     </div>
   );
 }
+
+export default SpinnerLoader;

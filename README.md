@@ -38,6 +38,7 @@ Only logged-in users can access detailed tile information, while the main catalo
 - HeroUI (@heroui/react)  
 - React-Srping (for animation)
 - React Icons
+- React Toastify
 - Next.js Proxy (route protection)
 - Better Auth
 - Custom Authentication (lib/auth)
